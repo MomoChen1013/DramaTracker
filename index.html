@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -47,6 +48,8 @@
   --c-cn-bg: #F5EAD3;
   --c-anime: #8868B0;         /* 薰衣草 */
   --c-anime-bg: #EDE4F5;
+  --c-variety: #4FA68A;       /* 抹茶綠 */
+  --c-variety-bg: #DEEDE5;
 
   /* status colors */
   --s-want: #B89146;          /* 待看 — 焦糖 */
@@ -246,6 +249,204 @@ input, textarea, select { color: var(--ink); }
 .stat-cell.s-watching::before { background: var(--s-watching); }
 .stat-cell.s-done::before { background: var(--s-done); }
 .stat-cell.s-drop::before { background: var(--s-drop); }
+
+/* ── 統計頁 ── */
+.stats-page { padding-bottom: 24px; }
+.stats-section {
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  padding: 18px 18px 16px;
+  margin-bottom: 14px;
+  box-shadow: var(--paper-shadow);
+}
+.stats-section-title {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.12em;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.stats-section-title::before {
+  content: '';
+  width: 3px; height: 14px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.stats-hero {
+  text-align: center;
+  padding: 22px 14px 18px;
+  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--bg-tint) 100%);
+  border-radius: var(--r-lg);
+  margin-bottom: 14px;
+}
+.stats-hero-num {
+  font-family: var(--serif);
+  font-size: 44px;
+  font-weight: 500;
+  color: var(--accent-deep);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.stats-hero-lbl {
+  font-size: 12px;
+  color: var(--ink-mute);
+  letter-spacing: 0.16em;
+  margin-top: 8px;
+}
+.stats-hero-meta {
+  font-size: 11px;
+  color: var(--ink-faint);
+  margin-top: 6px;
+  letter-spacing: 0.04em;
+}
+
+/* breakdown bars */
+.stats-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.stats-bar-row:last-child { margin-bottom: 0; }
+.stats-bar-label {
+  flex-shrink: 0;
+  width: 64px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.stats-bar-label .pf-emoji { font-size: 13px; }
+.stats-bar-track {
+  flex: 1;
+  height: 22px;
+  background: var(--bg-tint);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+  position: relative;
+}
+.stats-bar-fill {
+  height: 100%;
+  border-radius: var(--r-pill);
+  display: flex;
+  align-items: center;
+  padding-right: 8px;
+  justify-content: flex-end;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.04em;
+  transition: width 0.6s var(--ease);
+  min-width: 22px;
+}
+.stats-bar-fill.zero {
+  color: var(--ink-faint);
+  background: transparent;
+  font-weight: 500;
+  justify-content: flex-start;
+  padding-left: 8px;
+}
+.stats-bar-fill.t-jp { background: var(--c-jp); }
+.stats-bar-fill.t-kr { background: var(--c-kr); }
+.stats-bar-fill.t-cn { background: var(--c-cn); }
+.stats-bar-fill.t-anime { background: var(--c-anime); }
+.stats-bar-fill.t-variety { background: var(--c-variety); }
+.stats-bar-fill.s-want { background: var(--s-want); }
+.stats-bar-fill.s-watching { background: var(--s-watching); }
+.stats-bar-fill.s-done { background: var(--s-done); }
+.stats-bar-fill.s-drop { background: var(--s-drop); }
+.stats-bar-fill.pf { background: var(--ink-soft); }
+
+/* Top list */
+.stats-top-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.stats-top-row:last-child { border-bottom: none; }
+.stats-top-rank {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-tint);
+  color: var(--ink-mute);
+  font-family: var(--serif);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+.stats-top-row:nth-child(1) .stats-top-rank { background: var(--accent); color: white; }
+.stats-top-row:nth-child(2) .stats-top-rank { background: var(--accent-soft); color: var(--accent-deep); }
+.stats-top-title {
+  flex: 1;
+  font-family: var(--serif);
+  font-size: 13.5px;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.stats-top-stars {
+  font-size: 11px;
+  color: var(--star);
+  letter-spacing: 0;
+  flex-shrink: 0;
+}
+
+/* Empty stats */
+.stats-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--ink-faint);
+}
+.stats-empty-icon { font-size: 36px; margin-bottom: 10px; opacity: 0.4; }
+.stats-empty-text { font-size: 13px; letter-spacing: 0.06em; }
+
+/* Export buttons */
+.stats-export-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.stats-export-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 8px;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--r);
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s var(--ease);
+  font-family: inherit;
+}
+.stats-export-btn:active {
+  background: var(--bg-tint);
+  transform: scale(0.97);
+}
+.stats-export-btn .icon { font-size: 15px; }
+.stats-export-tip {
+  font-size: 11px;
+  color: var(--ink-faint);
+  text-align: center;
+  margin-top: 8px;
+  letter-spacing: 0.04em;
+}
+
 .stat-num {
   font-family: var(--serif);
   font-size: 22px;
@@ -475,6 +676,7 @@ input, textarea, select { color: var(--ink); }
 .card-tag.kr { background: var(--c-kr-bg); color: var(--c-kr); }
 .card-tag.cn { background: var(--c-cn-bg); color: var(--c-cn); }
 .card-tag.anime { background: var(--c-anime-bg); color: var(--c-anime); }
+.card-tag.variety { background: var(--c-variety-bg); color: var(--c-variety); }
 
 .card-stars {
   display: inline-flex;
@@ -721,6 +923,49 @@ input, textarea, select { color: var(--ink); }
 }
 .cal-day.today .cal-day-count { color: rgba(255,255,255,0.7); }
 
+/* — 月曆單項顯示劇照 — */
+.cal-day {
+  overflow: hidden;
+}
+.cal-poster-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+.cal-poster-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(58,46,38,0.05) 0%, rgba(58,46,38,0.15) 50%, rgba(58,46,38,0.55) 100%);
+}
+.cal-day.has-poster .cal-day-num,
+.cal-day.has-poster .cal-day-count {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.55);
+  font-weight: 600;
+}
+.cal-day.has-poster.today {
+  background: var(--ink);
+}
+.cal-day.has-poster .cal-status-mark {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  z-index: 2;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1.5px rgba(255,255,255,0.7);
+}
+.cal-status-mark.want { background: var(--s-want); }
+.cal-status-mark.watching { background: var(--s-watching); }
+.cal-status-mark.done { background: var(--s-done); }
+.cal-status-mark.drop { background: var(--s-drop); }
+
 /* 月曆下方詳情 */
 .cal-detail {
   background: var(--surface);
@@ -926,8 +1171,8 @@ input[type="date"].form-input {
 /* — 類型選擇 大圖示 — */
 .type-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
 }
 .type-option { position: relative; }
 .type-option input[type="radio"] {
@@ -941,19 +1186,19 @@ input[type="date"].form-input {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  padding: 12px 4px 10px;
+  gap: 4px;
+  padding: 10px 2px 9px;
   border-radius: var(--r);
   background: var(--surface);
   border: 1.5px solid var(--line);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   color: var(--ink-soft);
   transition: all 0.18s var(--ease);
-  min-height: 64px;
+  min-height: 60px;
 }
 .type-label .type-emoji {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1;
   transition: transform 0.2s var(--ease-bounce);
 }
@@ -964,6 +1209,68 @@ input[type="date"].form-input {
 .type-option.t-kr input:checked + .type-label { background: var(--c-kr-bg); border-color: var(--c-kr); color: var(--c-kr); }
 .type-option.t-cn input:checked + .type-label { background: var(--c-cn-bg); border-color: var(--c-cn); color: var(--c-cn); }
 .type-option.t-anime input:checked + .type-label { background: var(--c-anime-bg); border-color: var(--c-anime); color: var(--c-anime); }
+.type-option.t-variety input:checked + .type-label { background: var(--c-variety-bg); border-color: var(--c-variety); color: var(--c-variety); }
+
+/* — 觀看平台 — */
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.platform-option { position: relative; }
+.platform-option input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.platform-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 9px 4px;
+  border-radius: var(--r);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  transition: all 0.15s var(--ease);
+  min-height: 38px;
+  cursor: pointer;
+}
+.platform-label .pf-emoji {
+  font-size: 13px;
+  line-height: 1;
+}
+.platform-option input[type="checkbox"]:checked + .platform-label {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-deep);
+}
+
+/* — 卡片上的平台標 — */
+.card-platforms {
+  display: inline-flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.card-pf {
+  font-size: 9.5px;
+  padding: 2px 7px;
+  border-radius: var(--r-pill);
+  background: var(--surface-tinted);
+  color: var(--ink-mute);
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.card-pf .pf-emoji {
+  font-size: 10px;
+}
 
 /* — 狀態選擇 — */
 .status-grid {
@@ -1270,6 +1577,12 @@ input[type="date"].form-input {
   font-family: var(--num);
   font-variant-numeric: tabular-nums;
 }
+.detail-platforms {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
 .detail-note {
   font-size: 14px;
   color: var(--ink-soft);
@@ -1472,6 +1785,7 @@ input[type="date"].form-input {
   <div class="tabs" role="tablist">
     <button class="tab-btn active" id="tab-list" role="tab">清　單</button>
     <button class="tab-btn" id="tab-calendar" role="tab">月　曆</button>
+    <button class="tab-btn" id="tab-stats" role="tab">統　計</button>
   </div>
 </header>
 
@@ -1518,6 +1832,13 @@ input[type="date"].form-input {
     <div class="cal-grid" id="cal-grid"></div>
     <div id="cal-detail-wrap"></div>
   </div>
+
+  <!-- ════════════════════════════════════════════
+       STATS VIEW
+       ════════════════════════════════════════════ -->
+  <div id="view-stats" class="view" style="display:none;">
+    <div class="stats-page" id="stats-page"></div>
+  </div>
 </main>
 
 <!-- ════════════════════════════════════════════
@@ -1558,6 +1879,10 @@ input[type="date"].form-input {
               <input type="radio" name="f-type" value="anime">
               <span class="type-label"><span class="type-emoji">✨</span>動漫</span>
             </label>
+            <label class="type-option t-variety">
+              <input type="radio" name="f-type" value="variety">
+              <span class="type-label"><span class="type-emoji">🎤</span>綜藝</span>
+            </label>
           </div>
         </div>
 
@@ -1595,6 +1920,52 @@ input[type="date"].form-input {
           </button>
           <div class="form-collapse-body">
             <div class="form-collapse-inner">
+
+              <div class="form-group">
+                <label class="form-label">觀看平台</label>
+                <div class="platform-grid">
+                  <label class="platform-option">
+                    <input type="checkbox" name="f-platform" value="netflix">
+                    <span class="platform-label"><span class="pf-emoji">🎬</span>Netflix</span>
+                  </label>
+                  <label class="platform-option">
+                    <input type="checkbox" name="f-platform" value="disney">
+                    <span class="platform-label"><span class="pf-emoji">🏰</span>Disney+</span>
+                  </label>
+                  <label class="platform-option">
+                    <input type="checkbox" name="f-platform" value="iqiyi">
+                    <span class="platform-label"><span class="pf-emoji">📺</span>愛奇藝</span>
+                  </label>
+                  <label class="platform-option">
+                    <input type="checkbox" name="f-platform" value="viu">
+                    <span class="platform-label"><span class="pf-emoji">▶️</span>Viu</span>
+                  </label>
+                  <label class="platform-option">
+                    <input type="checkbox" name="f-platform" value="kktv">
+                    <span class="platform-label"><span class="pf-emoji">🎥</span>KKTV</span>
+                  </label>
+                  <label class="platform-option">
+                    <input type="checkbox" name="f-platform" value="linetv">
+                    <span class="platform-label"><span class="pf-emoji">💚</span>LINE TV</span>
+                  </label>
+                  <label class="platform-option">
+                    <input type="checkbox" name="f-platform" value="friday">
+                    <span class="platform-label"><span class="pf-emoji">🎞</span>friDay</span>
+                  </label>
+                  <label class="platform-option">
+                    <input type="checkbox" name="f-platform" value="bilibili">
+                    <span class="platform-label"><span class="pf-emoji">📡</span>Bilibili</span>
+                  </label>
+                  <label class="platform-option">
+                    <input type="checkbox" name="f-platform" value="youtube">
+                    <span class="platform-label"><span class="pf-emoji">📹</span>YouTube</span>
+                  </label>
+                  <label class="platform-option">
+                    <input type="checkbox" name="f-platform" value="other">
+                    <span class="platform-label"><span class="pf-emoji">🌐</span>其他</span>
+                  </label>
+                </div>
+              </div>
 
               <div class="form-group">
                 <label class="form-label">評分</label>
@@ -1712,10 +2083,12 @@ var store = (function(){
 // ════════════════════════════════════════════
 // CONSTANTS
 // ════════════════════════════════════════════
-var TYPE_MAP = { jp: '日劇', kr: '韓劇', cn: '古裝', anime: '動漫' };
-var TYPE_EMOJI = { jp: '🌸', kr: '🌊', cn: '🏯', anime: '✨' };
+var TYPE_MAP = { jp: '日劇', kr: '韓劇', cn: '古裝', anime: '動漫', variety: '綜藝' };
+var TYPE_EMOJI = { jp: '🌸', kr: '🌊', cn: '🏯', anime: '✨', variety: '🎤' };
 var STATUS_MAP = { want: '待看', watching: '觀看中', done: '已看完', drop: '棄劇' };
 var STATUS_ICON = { want: '📌', watching: '▶', done: '✓', drop: '✕' };
+var PLATFORM_MAP = { netflix: 'Netflix', disney: 'Disney+', iqiyi: '愛奇藝', viu: 'Viu', kktv: 'KKTV', linetv: 'LINE TV', friday: 'friDay', bilibili: 'Bilibili', youtube: 'YouTube', other: '其他' };
+var PLATFORM_EMOJI = { netflix: '🎬', disney: '🏰', iqiyi: '📺', viu: '▶️', kktv: '🎥', linetv: '💚', friday: '🎞', bilibili: '📡', youtube: '📹', other: '🌐' };
 
 // ════════════════════════════════════════════
 // STATE
@@ -1819,23 +2192,26 @@ function switchTab(tab) {
   currentTab = tab;
   $('tab-list').classList.toggle('active', tab === 'list');
   $('tab-calendar').classList.toggle('active', tab === 'calendar');
+  $('tab-stats').classList.toggle('active', tab === 'stats');
 
   var listV = $('view-list');
   var calV = $('view-calendar');
+  var statsV = $('view-stats');
+
+  listV.style.display = (tab === 'list') ? '' : 'none';
+  calV.style.display = (tab === 'calendar') ? '' : 'none';
+  statsV.style.display = (tab === 'stats') ? '' : 'none';
+
+  var activeView = (tab === 'list') ? listV : (tab === 'calendar') ? calV : statsV;
+  activeView.style.animation = 'none';
+  void activeView.offsetHeight;
+  activeView.style.animation = '';
 
   if (tab === 'calendar') {
-    listV.style.display = 'none';
-    calV.style.display = '';
-    calV.style.animation = 'none';
-    void calV.offsetHeight;
-    calV.style.animation = '';
     renderCalendar();
+  } else if (tab === 'stats') {
+    renderStatsPage();
   } else {
-    calV.style.display = 'none';
-    listV.style.display = '';
-    listV.style.animation = 'none';
-    void listV.offsetHeight;
-    listV.style.animation = '';
     renderStats();
     renderFilters();
     renderList();
@@ -1884,6 +2260,215 @@ function renderStats() {
 }
 
 // ════════════════════════════════════════════
+// STATS PAGE
+// ════════════════════════════════════════════
+function renderStatsPage() {
+  var page = $('stats-page');
+  var total = entries.length;
+
+  if (!total) {
+    page.innerHTML = '<div class="stats-empty"><div class="stats-empty-icon">📊</div><div class="stats-empty-text">還沒有紀錄，新增第一部開始追劇吧</div></div>' +
+      buildExportSection();
+    bindExportButtons();
+    return;
+  }
+
+  // Counts
+  var typeCount = {};
+  var statusCount = { want: 0, watching: 0, done: 0, drop: 0 };
+  var platformCount = {};
+  var totalStars = 0;
+  var ratedCount = 0;
+
+  entries.forEach(function(e){
+    typeCount[e.type] = (typeCount[e.type] || 0) + 1;
+    if (statusCount[e.status] !== undefined) statusCount[e.status]++;
+    if (e.platforms && e.platforms.length) {
+      e.platforms.forEach(function(p){ platformCount[p] = (platformCount[p] || 0) + 1; });
+    }
+    if (e.stars > 0) { totalStars += e.stars; ratedCount++; }
+  });
+
+  var avgRating = ratedCount ? (totalStars / ratedCount).toFixed(1) : '─';
+
+  // Hero
+  var hero = '<div class="stats-hero">' +
+    '<div class="stats-hero-num">' + total + '</div>' +
+    '<div class="stats-hero-lbl">總紀錄</div>' +
+    '<div class="stats-hero-meta">已看完 ' + statusCount.done + ' · 平均評分 ' + avgRating + (avgRating !== '─' ? ' / 5' : '') + '</div>' +
+  '</div>';
+
+  // Type breakdown
+  var typeKeys = ['jp','kr','cn','anime','variety'];
+  var typeHTML = typeKeys.map(function(k){
+    var n = typeCount[k] || 0;
+    var pct = total ? Math.round(n / total * 100) : 0;
+    var w = total ? Math.max(n / total * 100, n > 0 ? 8 : 0) : 0;
+    return '<div class="stats-bar-row">' +
+      '<div class="stats-bar-label"><span>' + (TYPE_EMOJI[k] || '') + '</span>' + TYPE_MAP[k] + '</div>' +
+      '<div class="stats-bar-track">' +
+        '<div class="stats-bar-fill ' + (n === 0 ? 'zero' : 't-' + k) + '" style="width:' + (n > 0 ? w : 100) + '%">' +
+        (n > 0 ? n + ' · ' + pct + '%' : '0') +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  // Status breakdown
+  var statusKeys = ['want','watching','done','drop'];
+  var statusHTML = statusKeys.map(function(k){
+    var n = statusCount[k] || 0;
+    var pct = total ? Math.round(n / total * 100) : 0;
+    var w = total ? Math.max(n / total * 100, n > 0 ? 8 : 0) : 0;
+    return '<div class="stats-bar-row">' +
+      '<div class="stats-bar-label">' + STATUS_MAP[k] + '</div>' +
+      '<div class="stats-bar-track">' +
+        '<div class="stats-bar-fill ' + (n === 0 ? 'zero' : 's-' + k) + '" style="width:' + (n > 0 ? w : 100) + '%">' +
+        (n > 0 ? n + ' · ' + pct + '%' : '0') +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  // Platform breakdown (top 6, only if used)
+  var pfArr = Object.keys(platformCount).map(function(k){ return { k: k, n: platformCount[k] }; });
+  pfArr.sort(function(a, b){ return b.n - a.n; });
+  var pfMax = pfArr[0] ? pfArr[0].n : 1;
+  var pfHTML = '';
+  if (pfArr.length) {
+    pfHTML = pfArr.slice(0, 8).map(function(item){
+      var w = item.n / pfMax * 100;
+      return '<div class="stats-bar-row">' +
+        '<div class="stats-bar-label"><span class="pf-emoji">' + (PLATFORM_EMOJI[item.k] || '') + '</span>' + (PLATFORM_MAP[item.k] || item.k) + '</div>' +
+        '<div class="stats-bar-track">' +
+          '<div class="stats-bar-fill pf" style="width:' + w + '%">' + item.n + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // Top rated (5 stars first, then 4+)
+  var topList = entries.filter(function(e){ return (e.stars || 0) >= 4; })
+    .slice().sort(function(a, b){ return (b.stars || 0) - (a.stars || 0); })
+    .slice(0, 5);
+  var topHTML = '';
+  if (topList.length) {
+    topHTML = topList.map(function(e, i){
+      var s = '';
+      for (var j = 0; j < (e.stars || 0); j++) s += '★';
+      return '<div class="stats-top-row">' +
+        '<div class="stats-top-rank">' + (i + 1) + '</div>' +
+        '<div class="stats-top-title">' + esc(e.title) + '</div>' +
+        '<div class="stats-top-stars">' + s + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  page.innerHTML =
+    hero +
+    '<div class="stats-section"><div class="stats-section-title">類型分佈</div>' + typeHTML + '</div>' +
+    '<div class="stats-section"><div class="stats-section-title">觀看狀態</div>' + statusHTML + '</div>' +
+    (pfHTML ? '<div class="stats-section"><div class="stats-section-title">觀看平台</div>' + pfHTML + '</div>' : '') +
+    (topHTML ? '<div class="stats-section"><div class="stats-section-title">高分推薦</div>' + topHTML + '</div>' : '') +
+    buildExportSection();
+
+  bindExportButtons();
+}
+
+function buildExportSection() {
+  return '<div class="stats-section">' +
+    '<div class="stats-section-title">資料備份</div>' +
+    '<div class="stats-export-row">' +
+      '<button type="button" class="stats-export-btn" id="btn-export-json"><span class="icon">📤</span>匯出備份</button>' +
+      '<button type="button" class="stats-export-btn" id="btn-import-json"><span class="icon">📥</span>匯入備份</button>' +
+    '</div>' +
+    '<input type="file" id="import-file" accept="application/json,.json" style="display:none;">' +
+    '<p class="stats-export-tip">備份為 JSON 檔案，可在不同裝置間轉移資料</p>' +
+  '</div>';
+}
+
+function bindExportButtons() {
+  var btnE = $('btn-export-json');
+  var btnI = $('btn-import-json');
+  var fileI = $('import-file');
+  if (btnE) btnE.addEventListener('click', exportData);
+  if (btnI) btnI.addEventListener('click', function(){ fileI.click(); });
+  if (fileI) fileI.addEventListener('change', importData);
+}
+
+function exportData() {
+  var data = {
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    count: entries.length,
+    entries: entries
+  };
+  var json = JSON.stringify(data, null, 2);
+  var blob = new Blob([json], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  var ts = new Date().toISOString().replace(/[:T]/g, '-').slice(0, 16);
+  a.href = url;
+  a.download = 'drama-tracker-backup-' + ts + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 100);
+  showToast('已匯出 ' + entries.length + ' 筆紀錄', 'success');
+}
+
+function importData(ev) {
+  var file = ev.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var data = JSON.parse(e.target.result);
+      var imported = data.entries || data; // 容錯：直接是陣列也能讀
+      if (!Array.isArray(imported)) throw new Error('格式錯誤');
+
+      // 過濾掉無效資料
+      imported = imported.filter(function(item){
+        return item && item.title && item.type && item.status;
+      });
+
+      if (!imported.length) {
+        showToast('檔案中沒有有效資料', 'warn');
+        return;
+      }
+
+      var msg = '即將匯入 ' + imported.length + ' 筆紀錄。\n\n選擇模式：\n· 確定 → 合併（保留現有 ' + entries.length + ' 筆並加入）\n· 取消 → 取消匯入';
+      if (!confirm(msg)) {
+        ev.target.value = '';
+        return;
+      }
+
+      // 合併：用 id 去重，沒有 id 的給新 id
+      var existingIds = {};
+      entries.forEach(function(e){ if (e.id) existingIds[e.id] = true; });
+      var added = 0;
+      imported.forEach(function(item){
+        if (!item.id || existingIds[item.id]) {
+          item.id = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+        }
+        // 確保平台欄位存在
+        if (!item.platforms) item.platforms = [];
+        entries.push(item);
+        added++;
+      });
+
+      save();
+      renderStatsPage();
+      showToast('已匯入 ' + added + ' 筆紀錄 ◡̈', 'success');
+    } catch (err) {
+      showToast('匯入失敗：' + (err.message || '檔案格式錯誤'), 'error');
+    }
+    ev.target.value = '';
+  };
+  reader.readAsText(file);
+}
+
+// ════════════════════════════════════════════
 // FILTER
 // ════════════════════════════════════════════
 function renderFilters() {
@@ -1892,7 +2477,8 @@ function renderFilters() {
     { k: 'jp', l: '日劇', dot: 'var(--c-jp)' },
     { k: 'kr', l: '韓劇', dot: 'var(--c-kr)' },
     { k: 'cn', l: '古裝', dot: 'var(--c-cn)' },
-    { k: 'anime', l: '動漫', dot: 'var(--c-anime)' }
+    { k: 'anime', l: '動漫', dot: 'var(--c-anime)' },
+    { k: 'variety', l: '綜藝', dot: 'var(--c-variety)' }
   ];
   var statuses = [
     { k: 'all', l: '全部狀態' },
@@ -1982,6 +2568,7 @@ function renderList() {
                    ((e.stars || 0) > 0 ? '<span class="card-stars">' + stars + '</span>' : '') +
                    (e.date ? '<span class="card-date">' + fmtDate(e.date) + '</span>' : '') +
                  '</div>' +
+                 ((e.platforms && e.platforms.length) ? '<div class="card-platforms">' + e.platforms.map(function(p){ return '<span class="card-pf"><span class="pf-emoji">' + (PLATFORM_EMOJI[p] || '') + '</span>' + (PLATFORM_MAP[p] || p) + '</span>'; }).join('') + '</div>' : '') +
                  (e.note ? '<div class="card-note">' + esc(e.note) + '</div>' : '') +
                '</div>' +
              '</div>' +
@@ -2032,23 +2619,34 @@ function renderCalendar() {
     var isToday = key === todayKey;
     var isWeekend = ((first + d - 1) % 7 === 0) || ((first + d - 1) % 7 === 6);
     var isSelected = key === selectedCalDay;
-    // 最多顯示 4 個 dots
-    var visible = de.slice(0, 4);
-    var dots = visible.map(function(e){
-      return '<div class="cal-dot ' + e.status + '"></div>';
-    }).join('');
-    var countBadge = de.length > 4 ? '<div class="cal-day-count">+' + (de.length - 4) + '</div>' : '';
 
     var classes = 'cal-day';
     if (isToday) classes += ' today';
     if (de.length) classes += ' has-entry';
     if (isSelected) classes += ' selected';
 
-    html += '<div class="' + classes + '" data-calday="' + key + '">' +
+    var inner = '';
+
+    // 單一項目且有劇照 → 整格用劇照當背景
+    if (de.length === 1 && de[0].poster) {
+      classes += ' has-poster';
+      var posterEsc = String(de[0].poster).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+      inner = '<div class="cal-poster-bg" style="background-image:url(\'' + posterEsc + '\')"></div>' +
               '<div class="cal-day-num' + (isWeekend ? ' weekend' : '') + '">' + d + '</div>' +
+              '<div class="cal-status-mark ' + de[0].status + '"></div>';
+    } else {
+      // 多項目或無劇照 → 圓點
+      var visible = de.slice(0, 4);
+      var dots = visible.map(function(e){
+        return '<div class="cal-dot ' + e.status + '"></div>';
+      }).join('');
+      var countBadge = de.length > 4 ? '<div class="cal-day-count">+' + (de.length - 4) + '</div>' : '';
+      inner = '<div class="cal-day-num' + (isWeekend ? ' weekend' : '') + '">' + d + '</div>' +
               '<div class="cal-dot-wrap">' + dots + '</div>' +
-              countBadge +
-            '</div>';
+              countBadge;
+    }
+
+    html += '<div class="' + classes + '" data-calday="' + key + '">' + inner + '</div>';
   }
   $('cal-grid').innerHTML = html;
 
@@ -2130,6 +2728,7 @@ function openDetail(id) {
     '</div>' +
     ((e.stars || 0) > 0 ? '<div class="detail-stars">' + stars + '</div>' : '') +
     (e.date ? '<div class="detail-date">📅 ' + fmtDateLong(e.date) + '</div>' : '') +
+    ((e.platforms && e.platforms.length) ? '<div class="detail-platforms">' + e.platforms.map(function(p){ return '<span class="card-pf"><span class="pf-emoji">' + (PLATFORM_EMOJI[p] || '') + '</span>' + (PLATFORM_MAP[p] || p) + '</span>'; }).join('') + '</div>' : '') +
     (e.note ? '<div class="detail-note">' + esc(e.note) + '</div>' : '') +
     '<div class="action-row">' +
       '<button class="action-btn" data-edit-id="' + e.id + '">✎ 編輯</button>' +
@@ -2185,6 +2784,8 @@ function openEditModal(id) {
 
   document.querySelectorAll('input[name="f-type"]').forEach(function(r){ r.checked = r.value === e.type; });
   document.querySelectorAll('input[name="f-status"]').forEach(function(r){ r.checked = r.value === e.status; });
+  var pf = e.platforms || [];
+  document.querySelectorAll('input[name="f-platform"]').forEach(function(r){ r.checked = pf.indexOf(r.value) >= 0; });
 
   if (e.poster) {
     $('poster-preview-img').src = e.poster;
@@ -2193,8 +2794,8 @@ function openEditModal(id) {
     $('poster-preview').style.display = 'none';
   }
 
-  // 編輯模式下，若有評分/日期/備註/封面，自動展開進階區
-  var hasAdvanced = (e.stars > 0) || e.date || e.note || e.poster;
+  // 編輯模式下，若有評分/日期/備註/封面/平台，自動展開進階區
+  var hasAdvanced = (e.stars > 0) || e.date || e.note || e.poster || (e.platforms && e.platforms.length);
   $('advanced-section').classList.toggle('open', !!hasAdvanced);
 
   updateStarUI(formStars);
@@ -2249,16 +2850,19 @@ function saveEntry() {
   var id = $('f-id').value;
   var isNew = !id;
 
+  var platforms = [];
+  document.querySelectorAll('input[name="f-platform"]:checked').forEach(function(el){ platforms.push(el.value); });
+
   if (id) {
     for (var i = 0; i < entries.length; i++) {
       if (entries[i].id === id) {
-        entries[i] = { id: id, title: title, type: type, status: status, stars: stars, date: date, note: note, poster: poster };
+        entries[i] = { id: id, title: title, type: type, status: status, stars: stars, date: date, note: note, poster: poster, platforms: platforms };
         break;
       }
     }
   } else {
     var newId = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
-    entries.push({ id: newId, title: title, type: type, status: status, stars: stars, date: date, note: note, poster: poster });
+    entries.push({ id: newId, title: title, type: type, status: status, stars: stars, date: date, note: note, poster: poster, platforms: platforms });
   }
   save();
   closeModals();
@@ -2296,6 +2900,7 @@ document.addEventListener('DOMContentLoaded', function() {
   $('btn-add-main').addEventListener('click', openAddModal);
   $('tab-list').addEventListener('click', function(){ switchTab('list'); });
   $('tab-calendar').addEventListener('click', function(){ switchTab('calendar'); });
+  $('tab-stats').addEventListener('click', function(){ switchTab('stats'); });
 
   // calendar nav
   $('cal-prev').addEventListener('click', function(){
